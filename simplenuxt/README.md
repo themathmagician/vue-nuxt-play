@@ -1,6 +1,21 @@
 # simplenuxt
 
-## Build Setup
+## To run the project in dev mode
+
+```bash
+# start, and navigate to localhost:3000
+docker-compose up
+# take down
+docker-compose down
+```
+
+## Todo
+
+- TODO handle image references
+- TODO beautify front page design
+- TODO read data from a file, instead of hard coded
+
+## Generapl build setup
 
 ```bash
 # install dependencies
