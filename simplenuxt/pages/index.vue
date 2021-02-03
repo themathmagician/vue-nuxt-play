@@ -2,8 +2,7 @@
   <div class="antialiased">
     <!-- menu bar -->
     <NavBar/>
-
-    <div class="text-gray-900 relative" >
+    <div class="text-gray-900 relative">
 
       <!-- hero -->
       <div class="w-full aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9">
