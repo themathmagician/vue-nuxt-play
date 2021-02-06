@@ -1,12 +1,24 @@
 <template>
-  <nuxt-content :document="doc"/>
+  <article>
+    <nuxt-content :document="doc"/>
+    <pre>
+      {{ doc }}
+    </pre>
+    <ActorCard :actor="doc.actor"/>
+  </article>
+
 </template>
 
 <script>
-  export default {
-    async asyncData({$content, params}){
-      const doc = await $content( 'events', params.slug ).fetch()
-      return { doc }
-    }
+
+import ActorCard from "../../components/ActorCard"
+
+export default {
+  components: {ActorCard},
+  async asyncData({$content, params}) {
+    const doc = await $content('games/burned/actors', params.slug).fetch()
+    return {doc}
   }
+}
+
 </script>

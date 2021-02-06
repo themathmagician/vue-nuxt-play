@@ -17,7 +17,7 @@
       <img class="h-64 w-full object-cover object-left-top" src="./../assets/img/zombies.jpeg">
 
       <!-- Card main content -->
-      <div class="px-6 py-4">
+      <div class="py-4">
         <div class="font-medium text-xs uppercase">
           <div class="text-gray-500">Starring:</div>
           <div>
@@ -37,7 +37,7 @@
         </div>
 
         <!-- Stats -->
-        <div class="flex flex-col border-t-4 border-dashed border-pink-700 mt-2 min-w-max">
+        <div class="flex flex-col border-t-4 border-dashed border-pink-700 px-4 mt-2 min-w-max">
           <div class="text-xs text-gray-500 font-bold uppercase my-2"> Stats:</div>
           <ul class="list-disc">
             <li class="flex align-center" v-if="content.stats.tech">

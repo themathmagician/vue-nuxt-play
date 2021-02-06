@@ -108,7 +108,15 @@ export default {
             tech: [{techdebt: +1}, {complexity: -2}],
             process: [{clarity: -1}]
           }
-        }]
+        }],
+        games: [
+          {
+            title: 'burned'
+          },
+          {
+            title: 'zombieland'
+          }
+        ]
     }
   }
 }
