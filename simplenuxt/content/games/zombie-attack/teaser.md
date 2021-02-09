@@ -10,7 +10,10 @@ game:
   enemies:
   - orphaned logic
   - big ball of mud
-  - single point of failure
+  - single point of failure 
+  img: https://images.unsplash.com/photo-1571553936876-08d809e23c42?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80
+  icon: HandIcon
+
 ---
 
 Read on, to learn more.

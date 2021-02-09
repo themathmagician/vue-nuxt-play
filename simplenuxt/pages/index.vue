@@ -1,7 +1,5 @@
 <template>
   <div class="antialiased">
-    <!-- menu bar -->
-    <NavBar/>
     <div class="text-gray-900 relative">
 
       <!-- hero -->
@@ -62,7 +60,7 @@
         <!-- the timeline itself -->
         <div class="absolute border-pink-50 order-1 h-full border-r-8 w-64 -ml-3.5"></div>
         <!--events -->
-        <div class="z-10" v-for="ec in eventContent">
+        <div class="z-10" v-for="ec in eventContent" :key="eventContent.title">
           <Event :content="ec"/>
         </div>
 

@@ -11,9 +11,6 @@ import GameCard from "~/components/GameCard";
 export default {
   components: {GameCard},
   async asyncData({$content, params}) {
-    console.log(`From asyncdata` )
-    console.log(params)
-    console.log(params.games_slug)
     const gc = await $content('games', params.games_slug, 'teaser').fetch()
     return {gc}
   }
