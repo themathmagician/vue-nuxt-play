@@ -5,7 +5,12 @@
       <h4 class="mt-4 font-medium text-lg text-gray-600 tracking-wide leading-relaxed text-justify">
         {{ game.subtitle }}</h4>
       <div>
-        <h4 class="mt-8 font-medium uppercase text-gray-600">Featuring </h4>
+        <h4 class="mt-8 font-medium uppercase text-gray-400">Featuring </h4>
+        <div class="flex">
+          <ActorCard class="m-4" name="agata" :preview="true"/>
+          <ActorCard class="m-4" name="antoni" :preview="true"/>
+        </div>
+
 
         <div class="mt-2">
           <h4 class="mt-2 font-small uppercase text-gray-400">Learn about </h4>
