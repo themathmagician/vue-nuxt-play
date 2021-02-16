@@ -1,32 +1,20 @@
 <template>
   <div>
-    <h1>Games</h1>
-
+    <card-title>Games</card-title>
     <GameCard
       class="mt-24 mx-6"
-      :game="gc.game" v-for="gc in gameContent" :key="extractName(gc.path)"/>
-
+      :game="name" v-for="name in $store.getters.gameNames" :key="name"/>
   </div>
 </template>
 
 <script>
 
-
 export default {
-  name: 'GamesIndex',
+  name: 'index',
 
-  async asyncData({$content, route, params}) {
-    const gameContent = await $content('games', {deep: true}).where({slug: 'teaser'}).only(['slug', 'game'])
-      .fetch()
-    return {gameContent}
+  async asyncData({store}) {
+    await store.dispatch('fetchGameTeasers')
   },
-  methods: {
-    // utility function
-    extractName: (path) => {
-      let contents = path.split('/')
-      return contents[contents.length - 2]
-    }
-  }
 
 }
 

@@ -18,20 +18,15 @@
 
       <!-- Card main content -->
       <div class="py-4">
+        <CardSubtitle>Starring</CardSubtitle>
         <div class="font-medium text-xs uppercase">
-          <div class="text-gray-500">Starring:</div>
-          <div>
             <span class="text-base underline mx-1" v-for="who in content.who">
           {{ who }}
         </span>
-          </div>
         </div>
-        <h3 class="font-bold text-gray-900 text-2xl mt-3 capitalize">
-          {{ content.title }}
-        </h3>
-        <div class="text-sm leading-snug tracking-wide text-gray-700 text-opacity-100 my-2">
-          What: {{ content.what }}
-        </div>
+        <card-title>{{ content.title }}</card-title>
+        <card-subtitle>What</card-subtitle>
+        <card-teaser-text>{{ content.what }}</card-teaser-text>
         <div class="overflow-ellipsis">
           {{ content.story }}
         </div>
@@ -41,20 +36,21 @@
           <div class="text-xs text-gray-500 font-bold uppercase my-2"> Stats:</div>
           <ul class="list-disc">
             <li class="flex align-center" v-if="content.stats.tech">
-              <div >
+              <div>
                 <CubeIcon class="mr-2 h-12 w-12"/>
               </div>
               <div class="flex flex-col my-2">
                 <span v-for="id in content.stats.tech">
                   <span v-for="entry in Object.entries(id)">
-                    <span class="bg-pink-700 text-pink-50 uppercase text-xs rounded-md my-1 mx-2 p-1 font-bold">
-                      {{entry[0] }}
-                    </span>
-                  <span class="font-bold text.sm"> {{ entry[1] }}</span>
-                  <span class="inline-block h-4 w-4" v-if="entry[1] >0"><TrendingUpIcon/></span>
-                  <span class="inline-block h-4 w-4" v-if="entry[1] <0"><TrendingDownIcon/></span>
+                    <PillLabel class="bg-pink-700 text-pink-50">{{ entry[0] }}</PillLabel>
+                    <pill-label>{{ entry[1] }}
+                      <span class="inline-block h-4 w-4" v-if="entry[1] >0"><TrendingUpIcon
+                        class="px-1 text-green-400"/></span>
+                      <span class="inline-block h-4 w-4" v-if="entry[1] <0"><TrendingDownIcon
+                        class="px-1 text-red-400"/></span>
+                    </pill-label>
                 </span>
-            </span>
+                </span>
               </div>
             </li>
           </ul>
@@ -67,11 +63,13 @@
 
 <script>
 
-import {SparklesIcon, UsersIcon, CubeIcon, FlagIcon, TrendingUpIcon, TrendingDownIcon} from "@vue-hero-icons/outline"
+import {CubeIcon, SparklesIcon, TrendingDownIcon, TrendingUpIcon} from "@vue-hero-icons/outline"
+import CardTitle from "~/components/layout-utils/CardTitle";
+import CardTeaserText from "~/components/layout-utils/CardTeaserText";
 
 export default {
   name: "Event",
-  components: {SparklesIcon, UsersIcon, CubeIcon, FlagIcon, TrendingUpIcon, TrendingDownIcon},
+  components: {CardTeaserText, CardTitle, SparklesIcon, CubeIcon, TrendingUpIcon, TrendingDownIcon},
   props: ['content'],
   computed: {
     serialized: obj => 2
@@ -79,6 +77,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

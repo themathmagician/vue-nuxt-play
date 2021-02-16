@@ -6,28 +6,21 @@
     <UserIcon v-else size="8x" class="block text-gray-600 rounded-full border-4"/>
     <h6 class="uppercase mt-2">{{name}}</h6>
   </div>
-  <div v-else class="rounded-md shadow-md
-      max-w-sm m-2 overflow-hidden">
-
+  <card v-else>
     <img v-if="imagePath" class="block fill-current w-64 h-full object-cover object-left-top"
          :src="imagePath" :alt="name">
     <UserIcon v-else size="8x" class="block text-gray-600 rounded-full border-4"/>
     <div>
-      <h3 class="mt-4 font-semibold text-xl text-white capitalize">Actor {{ name }}</h3>
-      <h4 class="mt-2 font-small uppercase text-gray-400">
-        Role:
-      </h4>
-      <h4 class="mt-2 font-medium uppercase text-gray-800">
-        {{ actor.role }}
-      </h4>
-      <h4 class="mt-2 font-small uppercase text-gray-400">
-        Bio:
-      </h4>
-      <h4 class="mt-2 font-medium uppercase text-gray-800">
-        {{ actor.bio }}
-      </h4>
+      <card-title>{{ name }}</card-title>
+      <card-subtitle>Role</card-subtitle>
+      <card-secondary-title> {{ actor.role }}</card-secondary-title>
+      <card-subtitle>Bio</card-subtitle>
+      <card-secondary-title> {{ actor.bio }}</card-secondary-title>
+      <card-teaser-text>
+        <slot></slot>
+      </card-teaser-text>
     </div>
-  </div>
+  </card>
 </template>`
 
 <script>
@@ -57,7 +50,7 @@ export default {
           bio: "undefined",
           charisma: 0,
           patience: 0,
-          tech: 10,
+          tech: 0,
           people: 0,
           process: 0
         }

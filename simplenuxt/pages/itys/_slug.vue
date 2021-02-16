@@ -4,7 +4,9 @@
     <pre>
       {{ doc }}
     </pre>
-    <ActorCard :actor="doc.actor"/>
+    <ActorCard :actor="doc.actor">
+      <nuxt-content class="w-1/2" :document="doc"/>
+    </ActorCard>
   </article>
 
 </template>

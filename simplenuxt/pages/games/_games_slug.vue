@@ -1,18 +1,17 @@
 <template>
-  <GameCard
-    class="mt-24 mx-6"
-    :game="gc.game" />
+  <GameCard class="mt-24 mx-6" :game="game" />
 </template>
 
 <script>
 
-import GameCard from "~/components/GameCard";
-
 export default {
-  components: {GameCard},
-  async asyncData({$content, params}) {
-    const gc = await $content('games', params.games_slug, 'teaser').fetch()
-    return {gc}
+  name: 'GameCardSlug',
+
+  async asyncData({params, store}) {
+    console.log(`slug is ${params.games_slug}`)
+    const game = params.games_slug
+    await store.dispatch('fetchGameTeasers')
+    return {game}
   }
 }
 

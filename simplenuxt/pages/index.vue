@@ -77,6 +77,7 @@ import Event from '../components/Event'
 import NavBar from "../components/NavBar";
 
 export default {
+  name: 'index',
   components: {NavBar, Event, PlayIcon},
   data() {
     return {
