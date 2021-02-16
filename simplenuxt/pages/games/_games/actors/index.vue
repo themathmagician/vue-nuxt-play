@@ -1,19 +1,21 @@
 <template>
   <div>
-    <h1>All Actors</h1>
-    <ActorCard v-for="ac in actorsContent"  :actor="ac.actor" :name="ac.slug" :key="ac.slug"/>
+    <h1>All Actors in {{this.game}}</h1>
+    <ActorCard v-for="ac in $store.getters.actorNames"  :actor="ac" :name="ac" :key="ac"/>
   </div>
 </template>
 
 <script>
 export default {
 
-  async asyncData({$content, route, params}) {
-    const actorsContent = await $content('games', params.games, 'actors', {deep: true}).fetch()
-    console.log(actorsContent)
-    return {actorsContent}
-  },
-  watchQuery: true
+  name: 'actor-index',
+
+  async asyncData({store, params}) {
+    //TODO add parameter here
+    const game = params.games
+    await store.dispatch( 'fetchActorsForGame', games)
+    return {game}
+  }
 }
 
 </script>
