@@ -23,8 +23,8 @@ export const mutations = {
   addGameContent( state, gc ) {
     state.gameContent[gc.name] = gc.content
   },
-  addActorContent( state, ac ){
-
+  addActorContent( state, {game:g, name:n, actor: a}){
+    state.gameContent[g].actors[n] = a
   }
 }
 
@@ -41,11 +41,10 @@ export const actions = {
      .forEach(tc => commit( "addGameContent", {name: extractGameNameFromTeaserPath(tc.path), content: tc.game} ))
   },
 
-  async fetchActorForGame({commit}, game) {
-    const actorsContent = await this.$content('games', games, 'actors', {deep: true}).fetch()
+  async fetchActorsForGame({commit}, game) {
+    const actorsContent = await this.$content('games', game, 'actors', {deep: true}).fetch()
     console.log(actorsContent)
     actorsContent
-      .forEach( ac => commit( 'addActorContent'))
-    return {actorsContent}
+      .forEach( ac => commit( 'addActorContent', {game: game, name:ac.slug, actor: ac.actor}))
   }
 }
