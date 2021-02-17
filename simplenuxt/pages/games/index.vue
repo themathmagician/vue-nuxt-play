@@ -14,6 +14,8 @@ export default {
 
   async asyncData({store}) {
     await store.dispatch('fetchGameTeasers')
+    await store.dispatch('fetchActorsForGame')
+
   },
 
 }

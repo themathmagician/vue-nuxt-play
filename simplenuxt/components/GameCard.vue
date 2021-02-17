@@ -1,11 +1,12 @@
 <template>
   <card class="ring-8 ring-purple-100 flex flex-col md:flex-row">
    <div>
-      <card-title class="text-2xl rounded-full m-2 px-2">{{ gc.emoji }}</card-title>
-      <card-subtitle class="mt-8">Featuring️</card-subtitle>
+      <card-title class="text-2xl text-pin rounded-full m-2 px-2">{{ gc.emoji }}</card-title>
+      <card-subtitle class="mt-8">Featuring️ {{this.game}}</card-subtitle>
       <div class="flex">
-        <ActorCard class="m-4" name="agata" :preview="true"/>
-        <ActorCard class="m-4" name="antoni" :preview="true"/>
+        <p  v-for="name in actors" :key="name"> {{`${game}-${name}`}} </p>
+        <AvatarView class="m-4"
+                    v-for="name in $store.getters.actorNames(this.game)" :game="game" :key="`${game}-${name}`"/>
       </div>
     </div>
     <div class="flex flex-col w-1/2">
@@ -48,29 +49,19 @@ export default {
       required: true
     }
   },
+
   computed: {
     gc() {
-      console.log(this.$store.getters.getGameByName(this.game))
-      return this.$store.getters.getGameByName(this.game)
+      console.log(this.$store.getters.getGame(this.game))
+      return this.$store.getters.getGame(this.game)
+    },
+    actors() {
+
+      console.log('actors')
+      console.log(this.$store.getters.actorNames(this.game))
+      return this.$store.getters.actorNames(this.game)
     }
   }
-  /** created() {
-    this.getIcon()
-  },
-   methods: {
-    getIcon() {
-      const icon = await import(AcademicCapIcon)
-      console.log(icon)
-    }
-  }
-
-   await store.dispatch({
-      type: 'fetchGame',
-      game: game
-    })
-
-   */
-
 }
 </script>
 

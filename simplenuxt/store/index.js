@@ -5,25 +5,43 @@ function extractGameNameFromTeaserPath(path) {
 }
 
 export const state = () => ({
-  gameContent: {
-    burned: {title: 'A cool game', actors: {}}
-  }
+  gameContent: {}
 })
 
 export const getters = {
+  isLoaded: (state, getters) => (id) => !!getters.getGame(id),
+  isLoadedActor: (state, getters) => (id) => !!(getters.getGame(id).actors && getters.getGame(id).actors.length > 0),
   gameNames: state => Object.keys(state.gameContent),
-  getGameByName: (state, getters) => (id) => state.gameContent[id],
-  actorNames: state => (gid, aid) => getters.getGameByName(gid).actors ? getters.getGameByName(gid).actors[aid]:undefined
+  getGame: (state) => (id) => state.gameContent[id],
+  getActor: (state, getters) => ({game, name}) => {
+    console.log('get actor for: ' + game + ', ' + name)
+    return getters.getGame(game).actors[name]
+  },
+  actorNames: (state, getters) => (id) => Object.keys(getters.getGame(id).actors)
 }
 
 export const mutations = {
-  setGameContent( state, gc ) {
+  setGameContent(state, gc) {
     state.gameContent = gc
   },
-  addGameContent( state, gc ) {
+  addGameContent(state, gc) {
     state.gameContent[gc.name] = gc.content
+    state.gameContent[gc.name].actors = {}
+
   },
-  addActorContent( state, {game:g, name:n, actor: a}){
+  addActorContent(state, {
+    game: g, name: n, actor: a = {
+      role: '?',
+      bio: '...',
+      charisma: 0,
+      patience: 0,
+      tech: 0,
+      people: 0,
+      process: 0
+    }
+  }) {
+    console.log(`adding actor ${a} with name ${n} to ${g}`)
+    console.log(a)
     state.gameContent[g].actors[n] = a
   }
 }
@@ -34,17 +52,24 @@ export const actions = {
     await store.dispatch('fetchGameTeasers')
   },
 
-  async fetchGameTeasers({commit}) {
+  async fetchGameTeasers({getters, commit, dispatch}) {
     const teaserContent = await this.$content('games', {deep: true}).where({slug: 'teaser'}).only(['slug', 'game'])
       .fetch()
     teaserContent
-     .forEach(tc => commit( "addGameContent", {name: extractGameNameFromTeaserPath(tc.path), content: tc.game} ))
+      .forEach(tc => commit("addGameContent", {name: extractGameNameFromTeaserPath(tc.path), content: tc.game}))
   },
 
-  async fetchActorsForGame({commit}, game) {
-    const actorsContent = await this.$content('games', game, 'actors', {deep: true}).fetch()
-    console.log(actorsContent)
-    actorsContent
-      .forEach( ac => commit( 'addActorContent', {game: game, name:ac.slug, actor: ac.actor}))
+  async fetchActorsForGame({getters, dispatch, commit}, game) {
+    if (!getters.isLoaded(game)) {
+      console.log(`loading game teasers before actors for ${game} `)
+      await dispatch('fetchGameTeasers')
+    }
+    if (!getters.isLoadedActor(game)) {
+      const actorsContent = await this.$content('games', game, 'actors', {deep: true}).fetch()
+      console.log(actorsContent)
+      actorsContent
+        .forEach(ac => commit('addActorContent', {game, name: ac.slug, actor: ac.actor}))
+    }
+
   }
 }
