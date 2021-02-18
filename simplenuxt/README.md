@@ -8,14 +8,21 @@ docker-compose up
 # take down
 docker-compose down
 ```
+## To run the project tests
+The test target is using `jest`as a test runner.
+
+```bash 
+npm run test
+```
 
 ## Todo
 
 - TODO handle image references
 - TODO beautify front page design
-- TODO read data from a file, instead of hard coded
+- TODO run tests using docker compose (!)
 
-## Generapl build setup
+
+## General build setup
 
 ```bash
 # install dependencies
