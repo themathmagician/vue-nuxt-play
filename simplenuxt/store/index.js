@@ -52,6 +52,12 @@ export const actions = {
     await store.dispatch('fetchGameTeasers')
   },
 
+  async init({dispatch, getters}){
+    await dispatch('fetchGameTeasers')
+    await getters.gameNames.forEach( name => dispatch('fetchActorsForGame', name)
+    )
+  },
+
   async fetchGameTeasers({getters, commit, dispatch}) {
     const teaserContent = await this.$content('games', {deep: true}).where({slug: 'teaser'}).only(['slug', 'game'])
       .fetch()

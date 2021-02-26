@@ -13,8 +13,7 @@ export default {
   name: 'index',
 
   async asyncData({store}) {
-    await store.dispatch('fetchGameTeasers')
-    await store.dispatch('fetchActorsForGame')
+    await store.dispatch('init')
 
   },
 

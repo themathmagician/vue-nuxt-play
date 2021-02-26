@@ -16,14 +16,15 @@ describe("store/index.js has games metadata and content", () => {
 
   beforeEach(async () => {
     store = await NuxtStore.createStore()
+    await store.dispatch('init')
   })
 
-  describe('actorNames', () => {
+  describe('Loading actor content', () => {
     let actorNames
     beforeEach(() => {
       actorNames = store.getters['actorNames']
     })
-    test(`it returns a non-empty list of names`, () => {
+    test(`when I call actorNames it returns a non-empty list of names`, () => {
       expect(actorNames('burned').length).toBeGreaterThan(0)
     })
   })
